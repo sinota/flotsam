@@ -1,0 +1,116 @@
+
+body {
+    font-size: 12px;
+    background-color: #eee;
+}
+
+.example h3 {
+    font-size: 100%;
+    border-bottom: 1px solid #eee;
+}
+.flexbox {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    margin: 0;
+    padding: 1%;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.justifyend {
+    justify-content: flex-end;
+}
+
+.separatebox .box:first-child {
+    margin-right: auto;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+/* Child boxes */
+
+.flexbox .box {
+    display: block;
+    box-sizing: border-box;
+    margin: 1%;
+    padding: 1%;
+    width: 15%;
+    background-color: #22aa66;
+    color: #fff;
+}
+
+
+.grideven .box {
+    width: auto;
+    flex: 1;  /* flex-grow: 1 */
+}
+
+.gridvar .box {
+    width: auto;
+    flex: 1;
+}
+.gridvar .box:first-child {
+    flex: 2;
+}
+
+.wrap .box {
+    width: auto;
+    flex-basis: 25%;
+    flex-grow: 1;
+}
+
+
+.pageframe {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    box-sizing: border-box;
+    margin: 2em auto 0;
+}
+
+.pageframe header,
+.pageframe footer {
+    flex: 0;
+
+    margin: 0;
+    padding: 1%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.pageframe .content {
+    flex: 1;
+    display: flex; /* sub flex-box container */
+
+    margin: 0;
+    padding: 1%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.pageframe .main {
+    flex: 1;
+    margin: 0;
+    padding: 1%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.pageframe .side-a,
+.pageframe .side-b {
+    width: 20%;
+    margin: 0;
+    padding: 1%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.pageframe .side-a {
+    order: -1;
+}

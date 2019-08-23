@@ -1,0 +1,32 @@
+
+.container {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #fff;
+    font-size: 12px;
+}
+
+.container .xbox {
+    box-sizing: border-box;
+    margin: 1%;
+    padding: 2em;
+    width: 48%;
+    border: 1px solid #ddd;
+}
+
+.container h3 {
+    font-size: 100%;
+}
+
+.container .xbox a:nth-of-type(2) {
+    pointer-events: none;
+}
+
+.container .xbox:nth-of-type(1) {
+    pointer-events: none;
+}

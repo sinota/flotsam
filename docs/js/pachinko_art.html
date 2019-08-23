@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    
+</head>
+<body>
+    <div class="mainpanel">
+<canvas style="position:absolute;visibility:hidden;"></canvas>
+
+文<br />
+<textarea cols="50" rows="5" id="moji">
+HGP創英角ｺﾞｼｯｸUB
+HGP創英角ﾎﾟｯﾌﾟ体
+HGP行書体
+HGP明朝B
+HGPｺﾞｼｯｸE
+HGP教科書体
+Arial Black
+Comic Sans MS
+Consolas
+Gabriola
+Gungsuh
+Segoe Print
+Monotype Corsiva
+KodchiangUPC
+Impact
+
+</textarea><br />
+
+フォント
+<input type="text" id="fonttp" list="flis" size=13 onclick="this.value=''" />
+<datalist id="flis">
+</datalist>
+
+フォントサイズ
+<input type="text" id="fontsz" size=5 value=90 />
+
+<br /><br />
+
+画面サイズ
+　横<input type="text" id="yoko" size=4 value="506" />
+　縦<input type="text" id="tate" size=4 value="300" />
+
+　<input type="button" onclick="preview_layout()" value="レイアウトだけ確認" />
+
+<br /><br />
+
+背景
+<select id="haikei1">
+<option value="0">透過</option>
+<option value="1" selected>組市松充填</option>
+<option value="2">マーブリング</option>
+<option value="5">再帰分割</option>
+<option value="3">オービットジュリア</option>
+<option value="4">多重マンデル</option>
+<option value="6">偽地球</option>
+<option value="7">灼熱の大腸</option>
+</select>
+
+
+<br />
+背景２
+<select id="haikei2">
+<option value="0">なし</option>
+<option value="1" selected>後光</option>
+<option value="2">スーパーバラ曲線</option>
+<option value="3">プラズマボール</option>
+<option value="4">モノクロ集中線</option>
+<option value="5">Gダラ集中線</option>
+</select>
+
+<br /><br />
+<input type="checkbox" id="suibotu" />水没させる
+<br /><br />
+
+
+画像読み込み（背景が透過の時有効）　<input type="file" onchange="yomi(0)" id="file1" />
+
+<br /><br />
+
+<input type="checkbox" id="giji" />疑似乱数を使用
+　シード値<input type="textbox" value=0 size=7 id="seedti" />
+
+<br /><br />
+
+<input type="button" onclick="aaa()" value="スタート" />
+<br />
+
+<img id="alt" />
+
+
+<br /><br /><br />
+～使い方～
+<br /><br />
+・文を入れます
+<br /><br />
+・スタートボタンを押します
+<br /><br />
+・完成！
+<br /><br />
+・右クリで保存します
+<br /><br />
+・#パチンコフォントメーカー　とつけてツイッターにアップします
+<br /><br />
+・俺が見て喜びます
+<br /><br />
+・ついでに製作者のアカウントをフォローします（任意）
+<br />
+<a href="https://twitter.com/jagarikin" target="blank">
+https://twitter.com/jagarikin</a>
+<br /><br /><br />
+・疑似乱数を使用　のチェックを入れると<br />
+シード値によって決まったパターンで描画されます
+
+</div><!-- mainpanel -->
+
+<script src="pachinko_art.js"></script>
+</body>
+</html>

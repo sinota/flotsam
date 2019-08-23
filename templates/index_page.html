@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>INDEX</title>
+</head>
+<body>
+  <div class="page-container">
+    <header></header>
+    <main>
+      <p>
+      {% for text, url in links %}
+      <a href="{{ url }}">{{ text }}</a><br>
+      {% endfor %}
+      </p>
+    </main>
+    <footer></footer>
+  </div>
+</body>
+</html>

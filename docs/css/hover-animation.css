@@ -1,0 +1,47 @@
+
+
+.box {
+    margin: 1em auto;
+    width: 60%;
+    height: 3em;
+    background-color: #aa8833;
+}
+.anim-trans {
+    transition: background-color 1s;
+}
+
+.anim-trans:hover {
+    background-color: #eeee55;
+    transition: background-color 3s;
+}
+
+.anim-frame {
+    animation-name: change_color;
+    animation-delay: 2s;
+    animation-duration: 1s;
+}
+
+.fill-none {
+    -webkit-animation-fill-mode: none;
+}
+
+.fill-forwards {
+    -webkit-animation-fill-mode: forwards;
+}
+
+.fill-backwards {
+    -webkit-animation-fill-mode: backwards;
+}
+
+.fill-both {
+    -webkit-animation-fill-mode: both;
+}
+
+@keyframes change_color {
+    0% {
+        background-color: #88aa33;
+    }
+    100% {
+        background-color: #eeee55;
+    }
+}

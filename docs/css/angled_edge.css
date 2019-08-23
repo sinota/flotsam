@@ -1,0 +1,50 @@
+body,
+.page_wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #332;
+    color: #fff;
+    font-size: 12pt;
+    line-height: 1;
+    padding: 1.5em;
+}
+header a {
+    color: #fff;
+}
+.first-content,
+.second-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 400px;
+    color: #fff;
+    font-size: 24pt;
+}
+
+.first-content {
+    z-index: 10;
+    background-color: rgb(207, 36, 16);
+}
+
+.first-content::after {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20height=%22100%22%20width=%22767%22%20fill=%22rgb(207,36,16)%22%20fill-opacity=%221%22%3E%3Cpolygon%20points=%220,0%20767,0%200,100%22%3E%3C/polygon%3E%3C/svg%3E");
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    content: '';
+    height: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    bottom: -100px;
+}
+
+.second-content {
+    background-color: #448855;
+    text-align: right;
+}
