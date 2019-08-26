@@ -2,12 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function(evt) {
     const canvas = document.getElementById('mycanvas');
-    const ctx = canvas.getContext("2d");
-
-    drawBackground(ctx);
-    drawShapes(ctx);
-    fill(canvas, 100, 100, [0, 80, 200, 255]);
-    fill(canvas, 360, 100, [0, 200, 80, 255]);
+    
+    const app = new Coloring(canvas, 'image/design-image.png');
 });
 
 function drawBackground(ctx) {
@@ -71,7 +67,7 @@ function fill(canvas, px, py, fcolor) {
         return false;
     };
 
-    const scolor = getColor(px, py);
+    const scolor = getColor(bdata, px, py);
     const pstack = [[px, py]];
     while (pstack.length) {
         let p = pstack.pop();
@@ -112,4 +108,129 @@ function fill(canvas, px, py, fcolor) {
         }
     }
     ctx.putImageData(image, 0, 0);
+}
+
+class Coloring {
+    constructor(canvas, imgPath) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext("2d");
+        canvas.addEventListener('mousedown', this.clicked.bind(this));
+
+        let dimg = new Image();
+        dimg.addEventListener('load', this.init.bind(this));
+        dimg.src = imgPath;
+        this.designImage = dimg;
+    }
+
+    init(evt) {
+        this.drawDesign();
+        this.designData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        this.clear();
+        this.imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        this.redraw();
+        this.fillColor = [200, 0, 0, 255];
+    }
+
+    clear() {
+        this.ctx.save();
+        this.ctx.fillStyle = '#ffffffff';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.restore();
+    }
+
+    drawDesign() {
+        this.ctx.drawImage(this.designImage, 0, 0, this.designImage.width, this.designImage.height);
+    }
+
+    redraw() {
+        this.clear();
+        this.ctx.putImageData(this.imageData, 0, 0);
+        this.drawDesign();
+    }
+
+    clicked(evt) {
+        let [px, py] = [evt.clientX, evt.clientY];
+        this.fill(px, py);
+        this.redraw();
+    }
+
+    fill(px, py) {
+        const ctx = this.ctx;
+        const image = this.imageData;
+        const bdata = image.data;
+        const ddata = this.designData.data;
+        const fcolor = this.fillColor;
+
+        const getColor = function (data, x, y) {
+            const pos = (y * image.width + x) * 4;
+            return [data[pos], data[pos+1], data[pos+2], data[pos+3]];
+        };
+
+        const putColor = function (x, y, color) {
+            const pos = (y * image.width + x) * 4;
+            for (let i = 0; i < 4; i++) {
+                bdata[pos + i] = color[i];
+            }
+        };
+
+        const matchColor = function (x, y, color) {
+            let [r, g, b, a] = getColor(ddata, x, y);
+
+            if ((r + g + b) < 100 && a > 200) {
+                return false;
+            }
+            [r, g, b, a] = getColor(bdata, x, y);
+
+            if (r === color[0] && g === color[1] && b === color[2]) {
+                return true;
+            }
+            return false;
+        };
+
+        const scolor = getColor(bdata, px, py);
+        if (scolor[0] === fcolor[0] && scolor[1] === fcolor[1] && scolor[2] === fcolor[2]) {
+            return;
+        }
+        const pstack = [[px, py]];
+        while (pstack.length) {
+            let p = pstack.pop();
+            let [x, y] = p;
+
+            while (y >= 0 && matchColor(x, y, scolor)) {
+                y -= 1;
+            }
+            y += 1;
+            let reachLeft = false;
+            let reachRight = false;
+            while (y <= this.canvas.height && matchColor(x, y, scolor)) {
+                putColor(x, y, fcolor);
+
+                if (x > 0) {
+                    if (matchColor(x-1, y, scolor)) {
+                        if (!reachLeft) {
+                            pstack.push([x-1, y]);
+                            reachLeft = true;
+                        }
+                    } else if (reachLeft) {
+                        reachLeft = false;
+                    }
+                }
+
+                if (x < this.canvas.width) {
+                    if (matchColor(x+1, y, scolor)) {
+                        if (!reachRight) {
+                            pstack.push([x+1, y]);
+                            reachRight = true;
+                        }
+                    } else if (reachRight) {
+                        reachRight = false;
+                    }
+                }
+                y += 1;
+
+            }
+        }
+
+    }
+
 }
